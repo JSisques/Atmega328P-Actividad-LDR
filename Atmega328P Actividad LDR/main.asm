@@ -15,12 +15,12 @@ esperaADC:
 
 	LDS R16, ADCH												;Almacenamos en R16 el valor de conversion en 8 bits
 	
-	CPI R16, 170												;Comparamos R16 con el valor 128 (la mitad de un registro)
-	BRMI encender_dos												;Saltamos a encender si lo anterior es mayor
+	CPI R16, 170												;Comparamos R16 con el valor 170 (2 tercios de un registro)
+	BRMI encender_dos											;Saltamos a encender_dos si lo anterior es menor
 
 
-	CPI R16, 85												;Comparamos R16 con el valor 128 (la mitad de un registro)
-	BRPL encender_una												;Saltamos a encender si lo anterior es mayor
+	CPI R16, 85													;Comparamos R16 con el valor 85 (un tercio del registro)
+	BRPL encender_una											;Saltamos a encender si lo anterior es mayor
 
 
 
@@ -29,13 +29,13 @@ esperaADC:
 	RJMP seguir													;Saltamos a la etiqueta seguir
 
 encender_una:
-	SBI PORTB, 1													;Ponemos todo a uno en el R20												;Sacamos por el puerto B el valor de R20
-	RJMP seguir
+	SBI PORTB, 1												;Activamos el LED de la posicion 1											;Sacamos por el puerto B el valor de R20
+	RJMP seguir													;Saltamos a seguir
 
 encender_dos:
-	SBI PORTB, 0
-	SBI PORTB, 1											;Sacamos por el puerto B el valor de R20
-	RJMP seguir
+	SBI PORTB, 0												;Activamos el LED de la posicion 0
+	SBI PORTB, 1												;Activamos el LED de la posicion 1
+	RJMP seguir													;Saltamos a seguir
 
 
 seguir:
